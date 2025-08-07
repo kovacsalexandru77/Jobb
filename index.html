@@ -166,6 +166,96 @@ h1 { margin:0; color:cyan; font-size:22px; }
   padding: 2px 6px;
   border-radius: 4px;
 }
+#preloader {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: cyan;
+  font-weight: bold;
+  font-size: 18px;
+  z-index: 2000;
+  background: rgba(0, 0, 0, 0.8);
+  padding: 20px 40px;
+  border-radius: 12px;
+  text-align: center;
+}
+
+/* Spinner animáció */
+.animation-preloader .spinner {
+  width: 40px;
+  height: 40px;
+  margin: 0 auto 10px;
+  border: 4px solid cyan;
+  border-top: 4px solid transparent;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+/* Szöveg animáció */
+.txt-loading .letters-loading {
+  display: inline-block;
+  animation: blink 1.5s infinite;
+}
+
+.txt-loading .letters-loading:nth-child(1) { animation-delay: 0s; }
+.txt-loading .letters-loading:nth-child(2) { animation-delay: 0.2s; }
+.txt-loading .letters-loading:nth-child(3) { animation-delay: 0.4s; }
+.txt-loading .letters-loading:nth-child(4) { animation-delay: 0.6s; }
+.txt-loading .letters-loading:nth-child(5) { animation-delay: 0.8s; }
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes blink {
+  0%, 50%, 100% { opacity: 1; }
+  25%, 75% { opacity: 0.3; }
+}
+.neon-loading {
+  font-weight: bold;
+  font-size: 24px;
+  color: #b266ff; /* világos lila */
+  text-shadow:
+     0 0 5px #b266ff,
+     0 0 10px #b266ff,
+     0 0 20px #a64dff,
+     0 0 30px #a64dff,
+     0 0 40px #9933ff,
+     0 0 55px #9933ff,
+     0 0 75px #8000ff;
+  letter-spacing: 3px;
+}
+
+/* Ha szeretnéd, animálhatjuk a fényt is */
+@keyframes neon-glow {
+  0%, 100% {
+    text-shadow:
+       0 0 5px #b266ff,
+       0 0 10px #b266ff,
+       0 0 20px #a64dff,
+       0 0 30px #a64dff,
+       0 0 40px #9933ff,
+       0 0 55px #9933ff,
+       0 0 75px #8000ff;
+  }
+  50% {
+    text-shadow:
+       0 0 10px #d1a3ff,
+       0 0 20px #d1a3ff,
+       0 0 30px #cc99ff,
+       0 0 40px #cc99ff,
+       0 0 50px #bf80ff,
+       0 0 65px #bf80ff,
+       0 0 85px #a366ff;
+  }
+}
+
+.neon-loading {
+  animation: neon-glow 2.5s ease-in-out infinite;
+}
 </style>
 </head>
 <script>
@@ -179,16 +269,32 @@ window.onerror = function(msg) {
     return true; // ezeket a hibákat rejti el
   }
   return false; // minden más hibát tovább enged
-};<
+};
 </script>
 </head>
 
 <body>
-
+<div id="preloader">
+  <div id="ovoo-preloader" class="ovoo-preloader">
+    <div class="animation-preloader">
+      <div class="spinner"></div>
+      <div class="txt-loading neon-loading">
+        <span class="letters-loading">ʟ</span>
+        <span class="letters-loading">ᴏ</span>
+        <span class="letters-loading">ᴀ</span>
+        <span class="letters-loading">ᴅ</span>
+        <span class="letters-loading">ɪ</span>
+        <span class="letters-loading">ɴ</span>
+        <span class="letters-loading">ɢ</span>
+        <span class="letters-loading">▶</span>
+      </div>
+    </div>  
+  </div>
+</div>
 <!-- 🔵 SIDEBAR – 10 kategória ikonokkal -->
 <div class="sidebar">
-  <a href="#" onclick="changeCategory('https://jobbmintatv.pro/filmek/1/1/drama/////')" title="Dráma"><i class="bi bi-theater-masks"></i></a>
-  <a href="#" onclick="changeCategory('https://jobbmintatv.pro/filmek/1/1/horror////')" title="Horror"><i class="bi bi-emoji-dizzy"></i></a>
+  <a href="#" onclick="changeCategory('https://jobbmintatv.pro/filmek/1/1/drama/////')" title="Dráma"><i class="bi bi-house-heart-fill"></i></a>
+  <a href="#" onclick="changeCategory('https://jobbmintatv.pro/filmek/1/1/horror////')" title="Horror"><i class="theater-masks"></i></a>
   <a href="#" onclick="changeCategory('https://jobbmintatv.pro/filmek/1/1/misztikus/////')" title="Misztikus"><i class="bi bi-moon-stars"></i></a>
   <a href="#" onclick="changeCategory('https://jobbmintatv.pro/filmek/1/1/sci-fi/fantasy////')" title="Sci-Fi/Fantasy"><i class="bi bi-stars"></i></a>
   <a href="#" onclick="changeCategory('https://jobbmintatv.pro/filmek/1/1/sci-fi/////')" title="Sci-Fi"><i class="bi bi-rocket"></i></a>
@@ -196,8 +302,8 @@ window.onerror = function(msg) {
   <a href="#" onclick="changeCategory('https://jobbmintatv.pro/filmek/1/1/thriller/////')" title="Thriller"><i class="bi bi-lightning"></i></a>
   <a href="#" onclick="changeCategory('https://jobbmintatv.pro/filmek/0/1/animacio///')" title="Animáció"><i class="bi bi-palette-fill"></i></a>
   <a href="#" onclick="changeCategory('https://jobbmintatv.pro/filmek/0/1/kaland////')" title="Kaland"><i class="bi bi-compass"></i></a>
-  <a href="#" onclick="changeCategory('https://jobbmintatv.pro/filmek/0/1/akcio/////')" title="Akció"><i class="bi bi-lightning-fill"></i></a>
-  <a href="#" onclick="changeCategory('https://jobbmintatv.pro/filmek/1/1/vigjatek/////')" title="Vigjatek"><i class="bi bi-lightning-fill"></i></a>
+  <a href="#" onclick="changeCategory('https://jobbmintatv.pro/filmek/0/1/akcio/////')" title="Akció"><i class="bi bi-speedometer"></i></a>
+  <a href="#" onclick="changeCategory('https://jobbmintatv.pro/filmek/1/1/vigjatek/////')" title="Vigjatek"><i class="bi bi-emoji-smile"></i></a>
 </div>
 
 <header>
